@@ -6,13 +6,15 @@ $obterDados = file_get_contents("php://input");
 
 $extrair = json_decode($obterDados);
 
+$idCurso = $extrair->cursos->idCurso;
 $nomeCurso = $extrair->cursos->nomeCurso;
 $valorCurso = $extrair->cursos->valorCurso;
 
-$sql = "INSERT INTO cursos (nomeCurso, valorCurso) VALUES ('$nomeCurso', $valorCurso";
+$sql = "UPDATE cursos SET nomeCurso='$nomeCurso', valorCurso=$valorCurso WHERE idCurso=$idCurso";
 mysqli_query($conexao, $sql);
 
 $curso =[
+    'idCurso' => $idCurso,
     'nomeCurso' => $nomeCurso,
     'valorCurso' => $valorCurso
 ]
